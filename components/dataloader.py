@@ -36,7 +36,9 @@ class Dataloder(tf.keras.utils.Sequence):
         start = i * self.batch_size
         stop = (i + 1) * self.batch_size
         data = []
-        for j in range(start, stop):
+        all_index=np.arange(len(self.dataset))
+        randindex=np.random.choice(all_index,self.batch_size,replace=False)
+        for j in randindex:
             data.append(self.dataset[j])
 
         batch = [np.squeeze(np.stack(samples, axis=1), axis=0) for samples in zip(*data)]

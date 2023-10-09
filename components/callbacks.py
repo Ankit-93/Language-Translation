@@ -23,9 +23,11 @@ def loss_function(real, pred):
     return tf.reduce_mean(loss_)
 
 from keras.callbacks import ModelCheckpoint
-filepath = 'saved_item/EncDecModel.tf'
+filepath = 'callbacks/EncDecModel.tf'
 checkpoint = ModelCheckpoint(filepath = filepath, monitor ='val_loss' ,mode='min',save_weights_only=True, save_best_only = True , verbose=0)
 
 
-from keras.callbacks import TensorBoard
+from keras.callbacks import TensorBoard,CSVLogger
 tensor = TensorBoard(log_dir='logs',histogram_freq=1,write_graph=True,write_grads=True)
+
+csv_logger = CSVLogger("Keras.log", separator=",", append=True)
